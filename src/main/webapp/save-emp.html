@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Registration</title>
+</head>
+
+<body>
+
+	<header>
+		<h1>Employee Registration Form</h1>
+		<p>Enter the employee details below.</p>
+	</header>
+
+	<main>
+		<form action="save_employee" method="post"> <br>
+				Employee id: <input type="number" id="id" name="id" required> <br>
+				Full name: <input type="text" id="name" name="name" required> <br>
+				Age: <input type="number" id="age" name="age" required> <br>
+				Address: <textarea id="address" name="address" rows="1" cols="50" required></textarea> <br>
+			<button type="submit">Save Employee</button>
+		</form>
+	</main>
+
+</body>
+
+</html>
