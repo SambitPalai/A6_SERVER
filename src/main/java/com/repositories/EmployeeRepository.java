@@ -3,6 +3,7 @@ package com.repositories;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EmployeeRepository {
@@ -24,4 +25,16 @@ public class EmployeeRepository {
 		conn.close();
 		return row+ "Row excuted\nUser created with id "+id;
 	}
+	
+	public ResultSet getEmployees(int id) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(url, user, pass);
+		String sql = "select * from emp_details where id=? ";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+//		conn.close(); can't use result set after the connection closes
+		return rs;
+	}
+	
 }
