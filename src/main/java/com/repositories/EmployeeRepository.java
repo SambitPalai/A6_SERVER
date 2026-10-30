@@ -26,7 +26,7 @@ public class EmployeeRepository {
 		return row+ "Row excuted\nUser created with id "+id;
 	}
 	
-	public ResultSet getEmployees(int id) throws Exception {
+	public ResultSet getEmployee(int id) throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url, user, pass);
 		String sql = "select * from emp_details where id=? ";
@@ -35,6 +35,13 @@ public class EmployeeRepository {
 		ResultSet rs = ps.executeQuery();
 //		conn.close(); can't use result set after the connection closes
 		return rs;
+	}
+	
+	public ResultSet getEmployees() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(url, user, pass);
+		String sql = "select * from emp_details";
+		return conn.prepareStatement(sql).executeQuery();
 	}
 	
 }

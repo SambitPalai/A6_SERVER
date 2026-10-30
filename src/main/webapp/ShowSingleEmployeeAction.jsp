@@ -16,7 +16,7 @@
 	<%
 		String sid = request.getParameter("id");
 		int id = Integer.parseInt(sid);
-		ResultSet rs = employeeRepository.getEmployees(id);
+		ResultSet rs = employeeRepository.getEmployee(id);
 		if (rs.next()) {
 	%>
 	<table>
