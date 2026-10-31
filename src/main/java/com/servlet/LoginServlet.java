@@ -23,11 +23,15 @@ public class LoginServlet extends HttpServlet{
 			if(userRepo.verifyUser(user, password, res, req)) {
 				PrintWriter pw = res.getWriter();
 				pw.print("<H1> Log in complete </H1>");
+				RequestDispatcher rd = req.getRequestDispatcher("home.html");
+				rd.include(req, res);
 				return;
 			}
 			else {
 				PrintWriter pw = res.getWriter();
 				pw.print("<H1> Log in failed </H1>");
+				RequestDispatcher rd = req.getRequestDispatcher("login.html");
+				rd.include(req, res);
 				
 //				Used to redirect page to login.html without using request dispatcher
 //				res.sendRedirect("login.html");

@@ -21,6 +21,8 @@
                 <th>Name</th>
                 <th>Age</th>
                 <th>Address</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +37,8 @@
                 <td><%= rs.getString("name")  %></td>
                 <td><%= rs.getInt("age")  %></td>
                 <td><%= rs.getString("address")  %></td>
+                <td><a href="UpdateEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Update "+rs.getString("name") %></a></td>
+                <td><a href="DeleteEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getString("name") %></a></td>
             </tr>
         
         <% 
