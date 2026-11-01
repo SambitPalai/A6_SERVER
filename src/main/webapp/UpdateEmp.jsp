@@ -9,6 +9,7 @@
 <title>Update Employee</title>
 </head>
 <body>
+
 	<%! EmployeeRepository er = new EmployeeRepository(); %>
 	<%	
 		int id = Integer.parseInt(request.getParameter("id")); 
@@ -17,7 +18,8 @@
 	%>
 	
 	<h1>Employee Update Form</h1>
-	<form action="/updateempaction" method="post">
+	<form action="updateempaction" method="post">
+		<input type="hidden" value="<%= id %>" name="id">
 		Enter new name <input type="text" name="name" value="<%= rs.getString("name") %>"> <br>
 		Enter new age <input type="number" name="age" value="<%= rs.getInt("age") %>"> <br>
 		Enter new address <input type="text" name="address" value="<%= rs.getString("address") %>"> <br>

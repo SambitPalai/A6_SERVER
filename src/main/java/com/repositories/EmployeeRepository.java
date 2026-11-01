@@ -43,5 +43,18 @@ public class EmployeeRepository {
 		String sql = "select * from emp_details";
 		return conn.prepareStatement(sql).executeQuery();
 	}
+
+	public void updateEmp(int id, String name, int age, String address) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(url, user, pass);
+		String sql = "update emp_details set name=?, age=?, address=? where id=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, name);
+		ps.setInt(2, age);
+		ps.setString(3, address);
+		ps.setInt(4, id);
+		ps.executeUpdate();
+		conn.close();
+	}
 	
 }
