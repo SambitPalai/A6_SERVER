@@ -18,7 +18,7 @@
         	<thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Name</th>  
                 <th>Age</th>
                 <th>Address</th>
                 <th>Update</th>
@@ -38,7 +38,7 @@
                 <td><%= rs.getInt("age")  %></td>
                 <td><%= rs.getString("address")  %></td>
                 <td><a href="UpdateEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Update "+rs.getString("name") %></a></td>
-                <td><a href="DeleteEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getString("name") %></a></td>
+                <td><a href="DeleteEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getInt("id") %></a></td>
             </tr>
         
         <% 
@@ -47,6 +47,8 @@
         
         </tbody>
     </table>
+	
+	<h1><a href="home.html">Back To Home</a></h1>
 	
 </body>
 </html>

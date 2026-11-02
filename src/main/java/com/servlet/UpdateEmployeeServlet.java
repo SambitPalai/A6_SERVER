@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.repositories.EmployeeRepository;
 
 @WebServlet("/updateempaction")
-public class UpdateEmployee extends HttpServlet{
+public class UpdateEmployeeServlet extends HttpServlet{
 	
 	EmployeeRepository er = new EmployeeRepository();
 	

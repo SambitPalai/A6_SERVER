@@ -57,4 +57,14 @@ public class EmployeeRepository {
 		conn.close();
 	}
 	
+	public void deleteEmp(int id) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(url, user, pass);
+		String sql = "delete from emp_details where id=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, id);
+		ps.executeUpdate();
+		conn.close();
+	}
+	
 }

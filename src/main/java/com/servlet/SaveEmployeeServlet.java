@@ -6,36 +6,38 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.repositories.UserRepository;
+import com.repositories.EmployeeRepository;
 import com.util.UserAuthentication;
 
-@WebServlet("/save_user")
-public class SaveUser extends HttpServlet {
+@WebServlet("/save_employee")
+public class SaveEmployeeServlet extends HttpServlet {
 
-	private UserRepository userRepository = new UserRepository();
+	private EmployeeRepository employeeRepository = new EmployeeRepository();
 	private UserAuthentication userAuthentication = new UserAuthentication();
 	
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
-		if(!userAuthentication.authenticate(session)) {
+		Cookie[] cookies = req.getCookies();
+		if(!userAuthentication.authenticate(cookies)) {
 			RequestDispatcher rd = req.getRequestDispatcher("login.html");
 			rd.forward(req, res);
 			return;
 		}
 		
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-		String role = req.getParameter("role");
-		
+		System.out.println("Request came from empsave html file");
+		int id = Integer.parseInt(req.getParameter("id"));
+		String name = req.getParameter("name");
+		int age = Integer.parseInt(req.getParameter("age"));
+		String address = req.getParameter("address");
+
 		try {
-			String reqResponse = userRepository.saveUser(email, password, role);
+			String reqResponse = employeeRepository.saveEmployee(id, name, age, address);
 			PrintWriter pw = res.getWriter();
 			pw.print("<H1> " + reqResponse + " </H1>");
 			return;
@@ -46,5 +48,7 @@ public class SaveUser extends HttpServlet {
 			rd.forward(req, res);
 			return;
 		}
+
 	}
+
 }
