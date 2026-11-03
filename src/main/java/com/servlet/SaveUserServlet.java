@@ -2,8 +2,10 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +26,10 @@ public class SaveUserServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession();
+		
+		ServletContext context = getServletContext();
+		Connection conn = (Connection)context.getAttribute("connection");
+		
 		if(!userAuthentication.authenticate(session)) {
 			RequestDispatcher rd = req.getRequestDispatcher("login.html");
 			rd.forward(req, res);
@@ -35,7 +41,7 @@ public class SaveUserServlet extends HttpServlet {
 		String role = req.getParameter("role");
 		
 		try {
-			String reqResponse = userRepository.saveUser(email, password, role);
+			String reqResponse = userRepository.saveUser(email, password, role, conn);
 			PrintWriter pw = res.getWriter();
 			pw.print("<H1> " + reqResponse + " </H1>");
 			return;

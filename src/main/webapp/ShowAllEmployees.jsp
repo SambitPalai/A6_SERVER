@@ -22,7 +22,8 @@
                 <th>Age</th>
                 <th>Address</th>
                 <th>Update</th>
-                <th>Delete</th>
+                <th>Direct Delete</th>
+                <th>Delete by Permission</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +39,13 @@
                 <td><%= rs.getInt("age")  %></td>
                 <td><%= rs.getString("address")  %></td>
                 <td><a href="UpdateEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Update "+rs.getString("name") %></a></td>
-                <td><a href="DeleteEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getInt("id") %></a></td>
+                
+                <!--This deletes the data by directly taking the id to the servlet we can't 
+                give raw java file here or it will give STATUS 404 : Resource not avaliable-->
+                <td><a href="deleteempaction?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getInt("id") %></a></td>
+                
+                <!--It directly takes the id from input to DeleteEmp.jsp -->
+                <td><a href="DeleteEmp.jsp?id=<%= rs.getInt("id") %>"><%= "Delete "+rs.getInt("id") %></a></td> 
             </tr>
         
         <% 

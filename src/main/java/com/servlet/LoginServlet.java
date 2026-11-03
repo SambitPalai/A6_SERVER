@@ -1,9 +1,13 @@
 package com.servlet;
 
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,16 +15,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.repositories.UserRepository;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = "/login", initParams = {
+		@WebInitParam(name = "name", value = "login"), 
+		@WebInitParam(name = "use", value = "authentication")
+})
+
 public class LoginServlet extends HttpServlet{
 	
 	private UserRepository userRepo = new UserRepository();
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException{
+		
+		ServletConfig config = getServletConfig();
+		System.out.println(config.getInitParameter("name")+" "+config.getInitParameter("use"));
+		
+		ServletContext context = getServletContext();
+		Connection conn = (Connection)context.getAttribute("connection");
+		
 		try {
 			String user = req.getParameter("email");
 			String password = req.getParameter("pass");
-			if(userRepo.verifyUser(user, password, res, req)) {
+			if(userRepo.verifyUser(user, password, res, req, conn)) {
 				PrintWriter pw = res.getWriter();
 				pw.print("<H1> Log in complete </H1>");
 				RequestDispatcher rd = req.getRequestDispatcher("home.html");

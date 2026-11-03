@@ -13,13 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class UserRepository {
 
-	private String url = "jdbc:mysql://localhost:3306/a6_servlet";
-	private String user = "root";
-	private String pass = "tiger";
-
-	public String saveUser(String email, String password, String role) throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = DriverManager.getConnection(url, user, pass);
+	public String saveUser(String email, String password, String role, Connection conn) throws SQLException, ClassNotFoundException {
 		String sql = "insert into user_details values(?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, email);
@@ -30,9 +24,7 @@ public class UserRepository {
 		return "User " + email + " signed up successfully";
 	}
 	
-	public boolean verifyUser(String email, String password, HttpServletResponse res, HttpServletRequest req) throws Exception{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = DriverManager.getConnection(url, user, pass);
+	public boolean verifyUser(String email, String password, HttpServletResponse res, HttpServletRequest req, Connection conn) throws Exception{
 		String sql = "select * from user_details where email=? and password=? ";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, email);

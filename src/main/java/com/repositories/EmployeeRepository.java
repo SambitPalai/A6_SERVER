@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
+
 public class EmployeeRepository {
 	
 	private String url = "jdbc:mysql://localhost:3306/a6_servlet";
